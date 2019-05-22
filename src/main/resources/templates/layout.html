@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Souvenir Shop</title>
+    <meta name="description" content="Souvenir Shop">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<div class=" container-scroller">
+
+    <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
+
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <span class="menu-title">About</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/purchase}">
+                            <span class="menu-title">Purchase</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/all}">
+                            <span class="menu-title">All</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/clear}">
+                            <span class="menu-title">Clear</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/report}">
+                            <span class="menu-title">Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="content-wrapper">
+                <th:block layout:fragment="title">
+
+                </th:block>
+
+                <th:block layout:fragment="body">
+
+                </th:block>
+
+
+            </div>
+            <footer class="footer">
+                <div class="container-fluid clearfix">
+            <span class="float-right">
+                Task "Souvenir Shop"  21.05.2019
+            </span>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
