@@ -9,7 +9,7 @@ import static java.util.Objects.isNull;
 @Service
 public class PurchaseService {
 
-	PurchaseRepository repository;
+	private PurchaseRepository repository;
 
 	public PurchaseService(PurchaseRepository purchaseRepository) {
 		this.repository = purchaseRepository;
@@ -20,5 +20,9 @@ public class PurchaseService {
 			throw new IllegalArgumentException("Could not create entity. Entity has already exists");
 		}
 		return repository.save(entity);
+	}
+
+	public Iterable<Purchase> getAllOrderedByDate() {
+		return repository.findAllByOrderByDate();
 	}
 }

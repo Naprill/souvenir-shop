@@ -1,0 +1,37 @@
+<th:block xmlns:th="http://www.thymeleaf.org"
+          xmlns:layout="http://www.w3.org/1999/xhtml"
+          layout:decorate="~{layout}">
+
+    <th:block layout:fragment="title">
+
+        <h2 class="card-title mb-4">All purchases</h2>
+
+    </th:block>
+
+    <th:block layout:fragment="body">
+
+        <div>
+            <table class="table no-footer">
+                <thead>
+                <th scope="col">Product name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Date</th>
+                </thead>
+                <tbody>
+                <tr th:each="purchase: ${purchases}">
+                    <td th:text="${purchase.name}"></td>
+                    <td th:text="${purchase.price}"></td>
+                    <td th:text="${purchase.currency.getName()}"></td>
+                    <td th:text="${purchase.date}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(purchases)}">
+                    <td colspan="20">No purchases</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </th:block>
+
+</th:block>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -41,8 +42,16 @@ public class PurchaseController {
 			return "purchase";
 		} else {
 			purchaseService.create(purchase);
-			return "purchase";
+			return "redirect:purchase/all";
 		}
+	}
+
+	@GetMapping("/all")
+	public ModelAndView getAllPurchases() {
+		ModelAndView modelAndView = new ModelAndView("all");
+		Iterable<Purchase> list = purchaseService.getAllOrderedByDate();
+		modelAndView.addObject("purchases", list);
+		return modelAndView;
 	}
 
 
