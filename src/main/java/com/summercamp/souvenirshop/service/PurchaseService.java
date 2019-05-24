@@ -19,7 +19,7 @@ public class PurchaseService {
 
 	public Purchase create(Purchase entity) {
 		if (!isNull(entity.getId())) {
-			throw new IllegalArgumentException("Could not create entity. Entity has already exists");
+			throw new IllegalArgumentException("Could not create entity. Entity already exists");
 		}
 		return repository.save(entity);
 	}

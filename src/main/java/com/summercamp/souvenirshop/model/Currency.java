@@ -1,7 +1,7 @@
 package com.summercamp.souvenirshop.model;
 
 /**
- * Currency with ISO codes
+ * Currency names with ISO codes
  */
 public enum Currency {
 	EUR("Euro"),
@@ -20,10 +20,6 @@ public enum Currency {
 
 	Currency(String name) {
 		this.name = name;
-	}
-
-	public boolean equalsName(String otherName) {
-		return name.equals(otherName);
 	}
 
 }
