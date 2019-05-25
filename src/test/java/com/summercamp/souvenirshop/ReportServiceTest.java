@@ -49,7 +49,7 @@ public class ReportServiceTest {
 		Purchase purchase = new Purchase();
 		purchase.setCurrency(Currency.UAH);
 		purchase.setPrice(90f);
-		List<Purchase> list = new ArrayList<>(Lists.list(purchase));
+		List<Purchase> list = Lists.list(purchase);
 		Mockito.when(repository.getAllPurchasesByYear(dto.getYear())).thenReturn(list);
 
 		String currencies = purchase.getCurrency().toString();
@@ -62,7 +62,7 @@ public class ReportServiceTest {
 		exchangeRate.put(targetCurrency, 1f);
 		Mockito.when(exchangeRatesService.getExchangeRates(targetCurrency)).thenReturn(exchangeRate);
 
-		assertThat(reportService.processReportRequest(dto), is("result: 3.0 EUR"));
+		assertThat(reportService.processReportRequest(dto), is("3.0 EUR"));
 
 	}
 }

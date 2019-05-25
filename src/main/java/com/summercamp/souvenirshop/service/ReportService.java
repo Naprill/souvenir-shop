@@ -36,18 +36,14 @@ public class ReportService {
 
 		Float amountInEuro = 0f;
 		for (Purchase purchase : list) {
-			for (String currency : exchangeRates.keySet()) {
-				if (currency.equals(purchase.getCurrency().toString())) {
-					amountInEuro += purchase.getPrice() / exchangeRates.get(currency);
-				}
-			}
+			amountInEuro += purchase.getPrice() / exchangeRates.get(purchase.getCurrency().toString());
 		}
 
 		String targetCurrency = dto.getCurrency().toString();
 		Map<String, Float> exchangeRate = exchangeRatesService.getExchangeRates(targetCurrency);
 		Float amountInTargetCurrency = amountInEuro * exchangeRate.get(targetCurrency);
 
-		return "result: " + amountInTargetCurrency + " " + targetCurrency;
+		return amountInTargetCurrency + " " + targetCurrency;
 	}
 
 }
