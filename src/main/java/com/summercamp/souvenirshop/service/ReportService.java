@@ -2,6 +2,7 @@ package com.summercamp.souvenirshop.service;
 
 import com.summercamp.souvenirshop.model.Purchase;
 import com.summercamp.souvenirshop.model.ReportDTO;
+import com.summercamp.souvenirshop.model.ReportResultDTO;
 import com.summercamp.souvenirshop.repository.PurchaseRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,11 @@ public class ReportService {
 		this.exchangeRatesService = exchangeRatesService;
 	}
 
-	public String processReportRequest(ReportDTO dto) throws Exception {
+	public ReportResultDTO processReportRequest(ReportDTO dto) throws Exception {
 
 		List<Purchase> list = repository.getAllPurchasesByYear(dto.getYear());
 		if (list.isEmpty()) {
-			return "There are no purchases for this year";
+			return new ReportResultDTO(null, 0f);
 		}
 
 		String currencies = list.stream()
@@ -43,7 +44,7 @@ public class ReportService {
 		Map<String, Float> exchangeRate = exchangeRatesService.getExchangeRates(targetCurrency);
 		Float amountInTargetCurrency = amountInEuro * exchangeRate.get(targetCurrency);
 
-		return amountInTargetCurrency + " " + targetCurrency;
+		return new ReportResultDTO(dto.getCurrency(), amountInTargetCurrency);
 	}
 
 }

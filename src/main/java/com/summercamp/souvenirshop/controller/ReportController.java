@@ -1,6 +1,7 @@
 package com.summercamp.souvenirshop.controller;
 
 import com.summercamp.souvenirshop.model.ReportDTO;
+import com.summercamp.souvenirshop.model.ReportResultDTO;
 import com.summercamp.souvenirshop.service.ReportService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -42,14 +43,20 @@ public class ReportController {
 		if (result.hasErrors()) {
 			return modelAndView;
 		} else {
-			String reportResult;
+			ReportResultDTO reportResult;
 			try {
 				reportResult = service.processReportRequest(reportDTO);
 			} catch (Exception e) {
 				modelAndView.addObject("result", "Something went wrong...");
 				return modelAndView;
 			}
-			modelAndView.addObject("result", reportResult);
+
+			if (reportResult.getAmount().equals(0f)) {
+				modelAndView.addObject("result", "There are no purchases for this year");
+			} else {
+				modelAndView.addObject("result",
+						reportResult.getAmount() + " " + reportResult.getCurrency().toString());
+			}
 			return modelAndView;
 		}
 	}

@@ -3,6 +3,7 @@ package com.summercamp.souvenirshop;
 import com.summercamp.souvenirshop.model.Currency;
 import com.summercamp.souvenirshop.model.Purchase;
 import com.summercamp.souvenirshop.model.ReportDTO;
+import com.summercamp.souvenirshop.model.ReportResultDTO;
 import com.summercamp.souvenirshop.repository.PurchaseRepository;
 import com.summercamp.souvenirshop.service.ExchangeRatesService;
 import com.summercamp.souvenirshop.service.ReportService;
@@ -62,7 +63,8 @@ public class ReportServiceTest {
 		exchangeRate.put(targetCurrency, 1f);
 		Mockito.when(exchangeRatesService.getExchangeRates(targetCurrency)).thenReturn(exchangeRate);
 
-		assertThat(reportService.processReportRequest(dto), is("3.0 EUR"));
+		ReportResultDTO result = new ReportResultDTO(Currency.EUR, 3f);
+		assertThat(reportService.processReportRequest(dto), is(result));
 
 	}
 }
