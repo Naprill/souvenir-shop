@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -43,7 +44,7 @@ public class ReportServiceTest {
 	}
 
 	@Test
-	public void testProcessReportRequest() throws Exception {
+	public void processReportRequestTest() throws Exception {
 		ReportDTO dto = new ReportDTO();
 		dto.setYear(2019);
 		dto.setCurrency(Currency.EUR);
@@ -66,5 +67,18 @@ public class ReportServiceTest {
 		ReportResultDTO result = new ReportResultDTO(Currency.EUR, 3f);
 		assertThat(reportService.processReportRequest(dto), is(result));
 
+	}
+
+	@Test
+	public void givenEmptyList_WhenReportRequest_ThenReturnEmptyDTO()throws Exception{
+		ReportDTO dto = new ReportDTO();
+		dto.setYear(2019);
+		dto.setCurrency(Currency.EUR);
+
+		List<Purchase> list = Lists.emptyList();
+		Mockito.when(repository.getAllPurchasesByYear(dto.getYear())).thenReturn(list);
+
+		ReportResultDTO result = new ReportResultDTO(null, 0f);
+		assertEquals(reportService.processReportRequest(dto), result);
 	}
 }
