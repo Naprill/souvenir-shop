@@ -41,7 +41,7 @@ public class ClearPurchaseController {
 			return "clear";
 		} else {
 			service.clear(dto);
-			return "redirect:all";
+			return "redirect:purchase/all";
 		}
 	}
 
