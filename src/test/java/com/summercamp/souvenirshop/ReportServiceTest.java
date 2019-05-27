@@ -81,4 +81,32 @@ public class ReportServiceTest {
 		ReportResultDTO result = new ReportResultDTO(null, 0f);
 		assertEquals(reportService.processReportRequest(dto), result);
 	}
+
+	@Test
+	public void processReportRequestTest2() throws Exception {
+		ReportDTO dto = new ReportDTO();
+		dto.setYear(2019);
+		dto.setCurrency(Currency.UAH);
+		Purchase purchase = new Purchase();
+		purchase.setCurrency(Currency.UAH);
+		purchase.setPrice(99f);
+		Purchase purchase1 = new Purchase();
+		purchase1.setCurrency(Currency.UAH);
+		purchase1.setPrice(1f);
+		List<Purchase> list = Lists.list(purchase, purchase1);
+		Mockito.when(repository.getAllPurchasesByYear(dto.getYear())).thenReturn(list);
+
+		String currencies = purchase.getCurrency().toString();
+		Map<String, Float> exchangeRates = new HashMap<>();
+		exchangeRates.put(currencies, 30f);
+		Mockito.when(exchangeRatesService.getExchangeRates(currencies)).thenReturn(exchangeRates);
+
+		String targetCurrency = dto.getCurrency().toString();
+		Map<String, Float> exchangeRate = new HashMap<>();
+		exchangeRate.put(targetCurrency, 30f);
+		Mockito.when(exchangeRatesService.getExchangeRates(targetCurrency)).thenReturn(exchangeRate);
+
+		ReportResultDTO result = new ReportResultDTO(Currency.UAH, 100f);
+		assertThat(reportService.processReportRequest(dto), is(result));
+	}
 }

@@ -31,6 +31,7 @@ public class ReportService {
 		String currencies = list.stream()
 				.map(Purchase::getCurrency)
 				.map(Enum::toString)
+				.distinct()
 				.collect(Collectors.joining(","));
 
 		Map<String, Float> exchangeRates = exchangeRatesService.getExchangeRates(currencies);
