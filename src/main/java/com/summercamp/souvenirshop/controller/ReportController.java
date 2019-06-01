@@ -55,7 +55,7 @@ public class ReportController {
 				modelAndView.addObject("result", "There are no purchases for this year");
 			} else {
 				modelAndView.addObject("result",
-						reportResult.getAmount() + " " + reportResult.getCurrency().toString());
+						String.format("%.2f", reportResult.getAmount()) + " " + reportResult.getCurrency().toString());
 			}
 			return modelAndView;
 		}
