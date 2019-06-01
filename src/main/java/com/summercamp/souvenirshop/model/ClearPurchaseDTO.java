@@ -16,4 +16,9 @@ public class ClearPurchaseDTO {
 	@NotNull(message = "Date is necessary")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate date;
+
+	/**
+	 * if true - clear purchases for a whole year
+	 */
+	private Boolean yearFlag;
 }

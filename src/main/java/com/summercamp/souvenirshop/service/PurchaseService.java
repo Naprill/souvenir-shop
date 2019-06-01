@@ -30,6 +30,10 @@ public class PurchaseService {
 
 	@Transactional
 	public void clear(ClearPurchaseDTO dto) {
-		repository.deleteByDate(dto.getDate());
+		if (dto.getYearFlag()) {
+			repository.deleteByYear(dto.getDate().getYear());
+		} else {
+			repository.deleteByDate(dto.getDate());
+		}
 	}
 }
