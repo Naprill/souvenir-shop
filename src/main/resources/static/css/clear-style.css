@@ -1,0 +1,6 @@
+.inline-field input,
+.inline-field label {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
